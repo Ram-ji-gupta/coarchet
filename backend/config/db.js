@@ -4,6 +4,7 @@ const path = require("path");
 
 const dbConfig = {
   host: process.env.DB_HOST || "localhost",
+  port: Number(process.env.DB_PORT ? process.env.DB_PORT.trim() : "") || 3306,
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
   database: process.env.DB_NAME || "woolcraft"
@@ -12,20 +13,29 @@ const dbConfig = {
 let pool = null;
 
 async function initializeDB() {
+  console.log(`Connecting to MySQL at ${dbConfig.host}:${dbConfig.port} as ${dbConfig.user}`);
   // 1. Connect without database to ensure it exists
   const connection = await mysql.createConnection({
     host: dbConfig.host,
+    port: dbConfig.port,
     user: dbConfig.user,
-    password: dbConfig.password
+    password: dbConfig.password,
+    multipleStatements: true
   });
 
   await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbConfig.database}\``);
   await connection.end();
 
   // 2. Create the connection pool
-  pool = mysql.createPool(dbConfig);
+  pool = mysql.createPool({ ...dbConfig, multipleStatements: true });
 
-  // 3. Create tables if they don't exist
+  // 3. Import SQL schema automatically when the database is empty
+  const [tables] = await pool.query("SHOW TABLES");
+  if (!tables || tables.length === 0) {
+    await importSqlSchema();
+  }
+
+  // 4. Ensure core tables exist in case the SQL file is missing
   await pool.query(`
     CREATE TABLE IF NOT EXISTS settings (
       id INT PRIMARY KEY,
@@ -74,7 +84,7 @@ async function initializeDB() {
     )
   `);
 
-  // 4. Seed data from db.json if database is empty
+  // 5. Seed data from db.json if database is empty and SQL schema import was not available
   const [settingsCount] = await pool.query("SELECT COUNT(*) as count FROM settings");
   const [productsCount] = await pool.query("SELECT COUNT(*) as count FROM products");
   const [customersCount] = await pool.query("SELECT COUNT(*) as count FROM customers");
@@ -137,6 +147,50 @@ async function initializeDB() {
   }
 }
 
+async function importSqlSchema() {
+  const candidates = [
+    // explicit env override (absolute or relative)
+    process.env.DB_INIT_SQL_PATH ? path.resolve(process.env.DB_INIT_SQL_PATH) : null,
+    // backend/config -> ../database (legacy/incorrect path that existed before)
+    path.join(__dirname, "../database/woolcraft-full.sql"),
+    // backend/config -> ../../database (repo-root/database)
+    path.join(__dirname, "../../database/woolcraft-full.sql"),
+    // repository root -> database (when running from project root)
+    path.join(process.cwd(), "database/woolcraft-full.sql"),
+    // fallback alternate filename
+    path.join(__dirname, "../../database/woolcraft-database.sql")
+  ].filter(Boolean);
+
+  const sqlPath = candidates.find((p) => fs.existsSync(p));
+
+  if (!sqlPath) {
+    console.warn(`DB initialization file not found. Tried paths:\n${candidates.join("\n")}`);
+    return;
+  }
+
+  const sql = fs.readFileSync(sqlPath, "utf8");
+  if (!sql.trim()) {
+    console.warn(`DB initialization file is empty: ${sqlPath}`);
+    return;
+  }
+
+  console.log(`Importing SQL schema from ${sqlPath}`);
+  await pool.query(sql);
+  console.log("SQL schema import completed");
+}
+
+// Helper used for testing/resolution
+function resolveSqlInitPath() {
+  const candidates = [
+    process.env.DB_INIT_SQL_PATH ? path.resolve(process.env.DB_INIT_SQL_PATH) : null,
+    path.join(__dirname, "../database/woolcraft-full.sql"),
+    path.join(__dirname, "../../database/woolcraft-full.sql"),
+    path.join(process.cwd(), "database/woolcraft-full.sql"),
+    path.join(__dirname, "../../database/woolcraft-database.sql")
+  ].filter(Boolean);
+  return candidates.find((p) => fs.existsSync(p)) || null;
+}
+
 function getPool() {
   if (!pool) throw new Error("Database pool not initialized. Call initializeDB() first.");
   return pool;
@@ -145,5 +199,6 @@ function getPool() {
 module.exports = {
   initializeDB,
   getPool,
-  query: (sql, params) => getPool().query(sql, params)
+  query: (sql, params) => getPool().query(sql, params),
+  resolveSqlInitPath
 };

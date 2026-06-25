@@ -37,3 +37,21 @@ exports.deleteCustomer = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// UPDATE CUSTOMER
+exports.updateCustomer = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const { name, phone, email, address } = req.body;
+    const [result] = await db.query(
+      "UPDATE customers SET name = ?, phone = ?, email = ?, address = ? WHERE id = ?",
+      [name, phone, email || null, address, id]
+    );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Customer not found" });
+    }
+    res.json({ message: "Customer Updated" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

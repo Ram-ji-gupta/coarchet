@@ -25,6 +25,21 @@
     <button class="save-btn" onclick="window.location='customers.html'">Customers</button>
     <button class="save-btn" onclick="window.location='orders.html'">Orders</button>
     <div id="customerList"></div>
+    
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <h3>Edit Customer</h3>
+        <input id="editName" placeholder="Name" />
+        <input id="editPhone" placeholder="Phone" />
+        <input id="editEmail" placeholder="Email" />
+        <textarea id="editAddress" placeholder="Address"></textarea>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px;">
+          <button class="save-btn" id="saveEditBtn">Save</button>
+          <button class="delete-btn" id="cancelEditBtn">Cancel</button>
+        </div>
+      </div>
+    </div>
 
   </div>
 

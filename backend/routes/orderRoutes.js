@@ -6,6 +6,8 @@ const {
   getOrders,
   createOrder,
   updateOrderStatus
+  ,
+  deleteOrder
 } = require("../controllers/orderController");
 
 // GET all orders (admin only)
@@ -16,5 +18,8 @@ router.post("/", createOrder);
 
 // UPDATE order status (admin only)
 router.put("/:id", requireAdmin, updateOrderStatus);
+
+// DELETE an order (admin only)
+router.delete("/:id", requireAdmin, deleteOrder);
 
 module.exports = router;

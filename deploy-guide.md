@@ -3,7 +3,9 @@
 ---
 
 ## YOUR LOCAL CREDENTIALS (From .env)
-- MySQL User: `root`
+- MySQL Host: `localhost`
+- MySQL Port: `3310`
+- MySQL User: `woolcraft_user` or `root`
 - MySQL Password: `rAmjig861@`
 - MySQL Database: `woolcraft`
 - JWT Secret: `change_this_to_a_strong_secret_key_in_production_123!@#$`

@@ -73,6 +73,12 @@ initializeDB()
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => {
-    console.error("Database initialization failed:", err.message);
+    const errorMessage = err && (err.message || (err.errors && err.errors.map(e => e.message).join("; ")) || String(err));
+    console.error("Database initialization failed:", errorMessage);
+    if (err && err.errors && Array.isArray(err.errors)) {
+      err.errors.forEach((subError, index) => {
+        console.error(`Database error ${index + 1}:`, subError && subError.message ? subError.message : subError);
+      });
+    }
     process.exit(1);
   });

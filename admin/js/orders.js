@@ -63,6 +63,10 @@ ${status}
 
 </div>
 
+  <div style="display:flex;gap:8px;margin-top:8px;">
+    <button class="delete-order-btn" data-action="delete-order">🗑️ Delete</button>
+  </div>
+
 </div>
 
 `;
@@ -144,6 +148,29 @@ document.addEventListener('click', (e) => {
   const card = e.target.closest('.order-card');
   if (!list || !card || !list.contains(card)) return;
   toggleCardSelected(card);
+});
+
+// Event delegation for delete order button
+document.getElementById('ordersList').addEventListener('click', async (e) => {
+  const btn = e.target.closest('button[data-action="delete-order"]');
+  if (!btn) return;
+  const card = btn.closest('.order-card');
+  const id = card && card.getAttribute('data-order-id');
+  if (!id) return;
+  if (!confirm('Delete this order?')) return;
+  try {
+    const token = localStorage.getItem('adminToken');
+    const res = await fetch(`http://localhost:5000/api/orders/${id}`, {
+      method: 'DELETE',
+      headers: token ? { Authorization: `Bearer ${token}` } : undefined
+    });
+    if (!res.ok) throw new Error(await res.text());
+    card.remove();
+    alert('Order deleted');
+  } catch (err) {
+    console.error(err);
+    alert('Delete failed');
+  }
 });
 
 loadOrders();

@@ -5,7 +5,8 @@ const requireAdmin = require("../middleware/requireAdmin");
 const {
   getCustomers,
   addCustomer,
-  deleteCustomer
+  deleteCustomer,
+  updateCustomer
 } = require("../controllers/customerController");
 
 // GET all customers (admin only)
@@ -16,5 +17,8 @@ router.post("/", addCustomer);
 
 // DELETE customer (admin only)
 router.delete("/:id", requireAdmin, deleteCustomer);
+
+// UPDATE customer (admin only)
+router.put("/:id", requireAdmin, updateCustomer);
 
 module.exports = router;
