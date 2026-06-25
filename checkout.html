@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Checkout at WoolCraft Studio — Securely place your order for premium handmade wool products.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#7a4f3d">
+
+  <title>Checkout | WoolCraft Studio</title>
+  <link rel="icon" href="images/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+
+  <!-- Dark mode (must load before render to prevent FOUC) -->
+  <script src="js/dark-mode.js"></script>
+
+  <style>
+    .checkout-section {
+      padding: 60px 4% !important;
+    }
+    .dark-checkout-form {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+      backdrop-filter: blur(18px) !important;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35) !important;
+      border-radius: 24px !important;
+      padding: 24px !important;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    html.dark-mode .dark-checkout-form {
+      background: rgba(0, 0, 0, 0.25) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .dark-checkout-form .form-group {
+      margin-bottom: 16px;
+    }
+    .dark-checkout-form input,
+    .dark-checkout-form textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9) !important;
+      border: 1px solid rgba(0, 0, 0, 0.15) !important;
+      color: #333333 !important;
+      font-family: inherit;
+    }
+    html.dark-mode .dark-checkout-form input,
+    html.dark-mode .dark-checkout-form textarea {
+      background: rgba(0, 0, 0, 0.4) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      color: #ffffff !important;
+    }
+    .dark-checkout-form input[type="text"],
+    .dark-checkout-form input[type="tel"],
+    .dark-checkout-form input[type="email"],
+    .dark-checkout-form textarea {
+      caret-color: auto !important;
+    }
+    html.dark-mode .dark-checkout-form input[type="text"],
+    html.dark-mode .dark-checkout-form input[type="tel"],
+    html.dark-mode .dark-checkout-form input[type="email"],
+    html.dark-mode .dark-checkout-form textarea {
+      caret-color: #ffffff !important;
+    }
+    .dark-checkout-form input::placeholder,
+    .dark-checkout-form textarea::placeholder {
+      color: rgba(0, 0, 0, 0.5) !important;
+    }
+    html.dark-mode .dark-checkout-form input::placeholder,
+    html.dark-mode .dark-checkout-form textarea::placeholder {
+      color: rgba(255, 255, 255, 0.6) !important;
+    }
+    .dark-checkout-form input:focus,
+    .dark-checkout-form textarea:focus {
+      outline: none;
+      border-color: var(--primary) !important;
+      box-shadow: 0 0 0 3px rgba(122, 79, 61, 0.25) !important;
+    }
+    .checkout-btn {
+      width: 100%;
+      margin-top: 14px;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 16px;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(145deg, rgba(122, 79, 61, 1), rgba(122, 79, 61, 0.78));
+      box-shadow: 0 18px 40px rgba(122, 79, 61, 0.25);
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .checkout-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+    }
+    .checkout-hint {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #666666 !important;
+      text-align: center;
+    }
+    html.dark-mode .checkout-hint {
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo" aria-label="WoolCraft Studio Home">
+      🧶 WoolCraft Studio
+    </a>
+
+    <button class="mobile-menu" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+      ☰
+    </button>
+
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="cart.html" aria-label="Shopping cart">🛒 (<span id="cartCount">0</span>)</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle" class="nav-filter" onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+    <section class="featured checkout-section fade-up" aria-label="Checkout Form Section">
+      <h2>Checkout</h2>
+
+      <form class="contact-form dark-checkout-form" onsubmit="event.preventDefault(); placeOrder();" novalidate>
+        <div class="form-group">
+          <input type="text" id="checkoutName" placeholder="Full Name" autocomplete="name" required aria-required="true">
+        </div>
+        <div class="form-group">
+          <input type="tel" id="checkoutPhone" placeholder="Phone Number" autocomplete="tel" required aria-required="true">
+        </div>
+        <div class="form-group">
+          <input type="email" id="checkoutEmail" placeholder="Email Address" autocomplete="email" required aria-required="true">
+        </div>
+        <div class="form-group">
+          <textarea id="checkoutAddress" placeholder="Delivery Address" required aria-required="true" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+          <textarea id="customRequirement" placeholder="Custom Requirement (optional)" rows="3"></textarea>
+        </div>
+        <button type="submit" class="checkout-btn">
+          Place Order
+        </button>
+        <p class="checkout-hint">Your order will be placed instantly after confirmation.</p>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 WoolCraft Studio. All rights reserved.</p>
+    <p><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="faq.html">FAQ</a></p>
+  </footer>
+
+  <!-- Floating Instagram & WhatsApp -->
+  <a href="https://www.instagram.com/croch_etgallery706?igsh=YTJ6MTA1MXlzYXkz" class="floating-instagram" target="_blank" rel="noopener noreferrer" aria-label="Follow on Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://wa.me/917973856211" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">💬</a>
+
+  <!-- Decorative orbs -->
+  <div class="orb orb1" aria-hidden="true"></div>
+  <div class="orb orb2" aria-hidden="true"></div>
+  <div class="orb orb3" aria-hidden="true"></div>
+
+  <!-- JS -->
+  <script src="js/config.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/checkout.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

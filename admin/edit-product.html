@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<script>
+  // Redirect /admin/edit-product.html?... to clean URL preserving query string
+  if (window.location.pathname.endsWith('.html')) {
+    const cleanPath = window.location.pathname.replace('.html', '');
+    const newUrl = cleanPath + window.location.search;
+    window.location.replace(newUrl);
+  }
+</script>
+    <title>Edit Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    <div class="mobile-header">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <h2>🧶 WoolCraft</h2>
+    </div>
+
+    <div class="sidebar">
+        <h2 id="desktopLogo">
+            🧶 WoolCraft
+        </h2>
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="add-product.html">
+            Add Product
+        </a>
+
+        <button onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+
+    <div class="content">
+
+        <h1>
+            Edit Product
+        </h1>
+
+        <input type="text" id="name" placeholder="Product Name">
+
+        <select id="category">
+          <option value="Apparels">Apparels</option>
+          <option value="Knitted">Knitted</option>
+          <option value="Bags">Bags</option>
+          <option value="Decorative Accessories">Decorative Accessories</option>
+          <option value="Woven">Woven</option>
+          <option value="Hanging Decorations">Hanging Decorations</option>
+          <option value="Gift Sets">Gift Sets</option>
+        </select>
+
+        <input type="number" id="price" placeholder="Price">
+
+        <input type="number" id="stock" placeholder="Stock">
+
+        <textarea id="description" placeholder="Description">
+</textarea>
+
+        <input type="file" id="imageFile">
+
+        <button onclick="updateProduct()">
+
+            Update Product
+
+        </button>
+
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script src="js/editProduct.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/globalSettings.js"></script>
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

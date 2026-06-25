@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Settings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+href="css/admin.css">
+</head>
+<body>
+<div class="mobile-header">
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+<h2>🧶 WoolCraft</h2>
+</div>
+
+<div class="sidebar">
+    <h2 id="desktopLogo">
+🧶 WoolCraft
+</h2>
+<a href="dashboard.html">
+Dashboard
+</a>
+<a href="products.html">
+Products
+</a>
+<a href="orders.html">
+Orders
+</a>
+<a href="customers.html">
+Customers
+</a>
+<a href="settings.html"
+class="active">
+Settings
+</a>
+<button onclick="logout()">
+Logout
+</button>
+</div>
+<div class="content">
+<h1>Settings</h1>
+<br>
+<div class="card">
+<h3>Store Information</h3>
+<br>
+<input
+type="text"
+id="storeName"
+placeholder="Store Name">
+<input
+type="text"
+id="storePhone"
+placeholder="Phone Number">
+<input
+type="email"
+id="storeEmail"
+placeholder="Email Address">
+<textarea
+id="storeAddress"
+placeholder="Store Address">
+</textarea>
+<button
+onclick="saveStoreSettings()">
+Save
+</button>
+</div>
+<br>
+<div class="card">
+<h3>Admin Account</h3>
+<br>
+<input
+type="text"
+id="adminUsername"
+placeholder="Username">
+<input
+type="password"
+id="adminPassword"
+placeholder="New Password">
+<button
+onclick="saveAdminSettings()">
+Update Account
+</button>
+</div>
+<br>
+<div class="card">
+<h3>Appearance</h3>
+<br>
+<button
+onclick="toggleDarkMode()">
+🌙 Toggle Dark Mode
+</button>
+</div>
+</div>
+<script src="js/admin.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/globalSettings.js"></script>
+<script src="js/auth.js"></script>
+<script>
+if(
+localStorage.getItem("darkMode")
+==="true"
+){
+document.body.classList.add(
+"dark-mode"
+);
+}
+</script>
+</body>
+</html>

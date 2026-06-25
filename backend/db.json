@@ -1,0 +1,174 @@
+{
+  "products": [
+    {
+      "id": 19,
+      "name": "🎀 Crocheted Pink Lace Bow",
+      "price": "180.00",
+      "category": "Apparels",
+      "stock": 15,
+      "image": "1782047348104-Crocheted Pink Lace Bow.webp",
+      "description": "Handmade wool bow in soft pink with a delicate white border, featuring intricate crochet lacework for a charming and elegant touch."
+    },
+    {
+      "id": 20,
+      "name": "Hair Clutcher",
+      "price": "299.00",
+      "category": "Apparels",
+      "stock": 10,
+      "image": "1782047414259-Hair Clutcher.webp",
+      "description": "Handmade wool hair accessory featuring crocheted sunflowers with yellow petals and brown centers, attached to braided strands for a natural, elegant look."
+    },
+    {
+      "id": 21,
+      "name": "Fluffy Cloud Scrunchie (Gagra)",
+      "price": "250.00",
+      "category": "Apparels",
+      "stock": 14,
+      "image": "1782047705492-WhatsApp Image 2026-06-16 at 11.03.43 AM.webp",
+      "description": "Handmade wool scrunchie with a soft, plush texture that adds cozy charm and a gentle hold to any hairstyle."
+    },
+    {
+      "id": 22,
+      "name": "Bloom Crochet Sunflower",
+      "price": "250.00",
+      "category": "Gift Sets",
+      "stock": 20,
+      "image": "1782048230689-WhatsApp Image 2026-06-03 at 7.30.02 PM (1).webp",
+      "description": "Handmade crochet sunflower with bright yellow petals, a rich brown center, and green leaves, beautifully wrapped in decorative paper and tied with a festive ribbon."
+    },
+    {
+      "id": 23,
+      "name": "Dreamy Wings Crochet Butterfly",
+      "price": "180.00",
+      "category": "Gift Sets",
+      "stock": 15,
+      "image": "1782048329432-WhatsApp Image 2026-06-03 at 7.30.03 PM.webp",
+      "description": "Handmade crochet butterfly ornament in soft pink, white, and blue yarn, with delicate braided strands ending in tiny flower motifs for a whimsical touch."
+    },
+    {
+      "id": 24,
+      "name": "Cozy Bunny with Pink Scarf",
+      "price": "500.00",
+      "category": "Gift Sets",
+      "stock": 5,
+      "image": "1782048419457-WhatsApp Image 2026-06-03 at 7.30.03 PM (1).webp",
+      "description": "Handmade crochet bunny doll in soft white yarn, featuring long ears with pink details, stitched eyes and smile, and a cute pink scarf for added charm."
+    },
+    {
+      "id": 25,
+      "name": "Blooming Vines Crochet Planter",
+      "price": "350.00",
+      "category": "Hanging Decorations",
+      "stock": 10,
+      "image": "1782048660329-WhatsApp Image 2026-06-16 at 11.05.08 AM.webp",
+      "description": "Handmade yarn hanging planter featuring crocheted green vines with white flowers and yellow centers, suspended by sturdy cords for a charming, nature‑inspired décor piece."
+    },
+    {
+      "id": 26,
+      "name": "Elegant Red & White Khana Dress Set",
+      "price": "650.00",
+      "category": "Gift Sets",
+      "stock": 20,
+      "image": "1782048918076-WhatsApp Image 2026-06-16 at 11.06.13 AM.webp",
+      "description": "Handmade crochet khana dress with scalloped edges in alternating red and white yarn, adorned with delicate beadwork. Paired with a matching heart-shaped crochet piece, this set showcases fine craftsmanship and festive charm."
+    },
+    {
+      "id": 27,
+      "name": "Scarlet Bloom Beaded Bag - Test Updated Twice",
+      "price": "799.00",
+      "category": "Bags",
+      "stock": 15,
+      "image": "1782049110276-WhatsApp Image 2026-06-03 at 7.30.02 PM.webp",
+      "description": "Unique handmade round handbag designed like a vibrant red flower, paired with a striking strap of large white beads for a bold and elegant statement piece."
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "customer": "Ram Gupta",
+      "phone": "9876543210",
+      "email": null,
+      "address": "Delhi",
+      "custom_requirement": null,
+      "status": "Shipped",
+      "created_at": "2026-06-16T06:28:27.000Z",
+      "total": "0.00"
+    },
+    {
+      "id": 2,
+      "customer": "test order",
+      "phone": "7973856211",
+      "email": null,
+      "address": "test address",
+      "custom_requirement": null,
+      "status": "Shipped",
+      "created_at": "2026-06-21T13:53:35.000Z",
+      "total": "360.00"
+    },
+    {
+      "id": 3,
+      "customer": "test2",
+      "phone": "7973856211",
+      "email": null,
+      "address": "test2",
+      "custom_requirement": null,
+      "status": "Shipped",
+      "created_at": "2026-06-21T17:39:01.000Z",
+      "total": "799.00"
+    },
+    {
+      "id": 4,
+      "customer": "test3",
+      "phone": "7973856211",
+      "email": null,
+      "address": "test3",
+      "custom_requirement": null,
+      "status": "Shipped",
+      "created_at": "2026-06-21T17:45:39.000Z",
+      "total": "650.00"
+    },
+    {
+      "id": 5,
+      "customer": "test4",
+      "phone": "7489542658",
+      "email": "dsr@gmail.com",
+      "address": "kjsdtest4",
+      "custom_requirement": "test567",
+      "status": "Delivered",
+      "created_at": "2026-06-22T17:25:18.000Z",
+      "total": "350.00"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "Ram",
+      "phone": "9876543210",
+      "address": "Delhi",
+      "email": null
+    },
+    {
+      "id": 2,
+      "name": "test order",
+      "phone": "7973856211",
+      "address": "test address",
+      "email": null
+    },
+    {
+      "id": 3,
+      "name": "test4",
+      "phone": "7489542658",
+      "address": "kjsdtest4",
+      "email": "dsr@gmail.com"
+    }
+  ],
+  "settings": {
+    "id": 1,
+    "store_name": "WoolCraft-1",
+    "phone": "8957265847",
+    "email": "",
+    "address": "Jaipur.Rajasthan",
+    "admin_username": "admin",
+    "admin_password": "admin@123"
+  }
+}

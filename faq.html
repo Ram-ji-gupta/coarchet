@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frequently Asked Questions (FAQ) - WoolCraft Studio. Find answers about handmade wool flower care, customization, orders, and shipping.">
+  <meta name="keywords" content="wool craft faq, handmade wool care, custom order shipping time">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#7a4f3d">
+  <link rel="canonical" href="https://woolcraftstudio.com/faq.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FAQ | WoolCraft Studio">
+  <meta property="og:description" content="Find answers to common questions about WoolCraft Studio handmade products.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://woolcraftstudio.com/faq.html">
+  <meta property="og:image" content="https://woolcraftstudio.com/images/Sunflower.webp">
+  <meta property="og:site_name" content="WoolCraft Studio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FAQ | WoolCraft Studio">
+  <meta name="twitter:description" content="Find answers to common questions about WoolCraft Studio handmade products.">
+  <meta name="twitter:image" content="https://woolcraftstudio.com/images/Sunflower.webp">
+
+  <title>Frequently Asked Questions | WoolCraft Studio</title>
+  <link rel="icon" href="images/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+
+  <!-- Dark mode (must load before render to prevent FOUC) -->
+  <script src="js/dark-mode.js"></script>
+
+  <style>
+    .faq-section {
+      padding: 60px 4% !important;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-container {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .faq-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    html.dark-mode .faq-item {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .faq-question {
+      padding: 20px 24px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    html.dark-mode .faq-question {
+      color: var(--text-light);
+    }
+    .faq-question:hover {
+      background: rgba(122, 79, 61, 0.08);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s ease;
+      padding: 0 24px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555555;
+    }
+    html.dark-mode .faq-answer {
+      color: #cccccc;
+    }
+    .faq-item.active .faq-answer {
+      padding-bottom: 20px;
+      max-height: 300px;
+    }
+    .faq-icon {
+      font-size: 18px;
+      transition: transform 0.3s ease;
+      color: var(--primary);
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo" aria-label="WoolCraft Studio Home">
+      🧶 WoolCraft Studio
+    </a>
+
+    <button class="mobile-menu" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+      ☰
+    </button>
+
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="cart.html" aria-label="Shopping cart">🛒 (<span id="cartCount">0</span>)</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle" class="nav-filter" onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+    <section class="faq-section fade-up" aria-label="FAQ Content">
+      <h2>Frequently Asked Questions</h2>
+      <p class="section-desc">Find quick answers to common queries about our handmade products, customization options, and order delivery.</p>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Are the products 100% handmade?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, absolutely! Every flower, brooch, headband, and Kanha dress at WoolCraft Studio is meticulously handcrafted by hand using premium, high-quality wool threads. No two products are completely identical, which adds to their unique charm.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I customize the colors or sizes?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, customization is one of our specialities! If you want a product in a different color scheme, size, or pattern, you can write details in the custom requirement box during checkout or click the floating WhatsApp button to chat with us directly.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>How do I care for my wool crafts?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>To keep your wool items looking beautiful, we recommend gentle hand washing in cold water using a mild wool detergent, followed by flat air drying. Avoid machine washing, wringing, or direct heat/sunlight, which could cause shape distortion or color fading.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>How long will it take to receive my order?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Since each item is handmade to order, preparation time varies. Typically, standard orders are processed and crafted within 2-4 business days. Delivery times depend on your location, but usually take another 3-5 business days across India.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>What are the payment options?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>We accept bank transfers, UPI apps (Google Pay, PhonePe, Paytm), and other popular digital payment options. After placing your order, we will reach out to confirm your customized needs and share the payment details.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 WoolCraft Studio. All rights reserved.</p>
+    <p><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="faq.html">FAQ</a></p>
+  </footer>
+
+  <!-- Floating Instagram & WhatsApp -->
+  <a href="https://www.instagram.com/croch_etgallery706?igsh=YTJ6MTA1MXlzYXkz" class="floating-instagram" target="_blank" rel="noopener noreferrer" aria-label="Follow on Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://wa.me/917973856211" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">💬</a>
+
+  <!-- Decorative orbs -->
+  <div class="orb orb1" aria-hidden="true"></div>
+  <div class="orb orb2" aria-hidden="true"></div>
+  <div class="orb orb3" aria-hidden="true"></div>
+
+  <!-- JS -->
+  <script src="js/config.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/navbar.js"></script>
+  <script>
+    function toggleFaq(element) {
+      const item = element.parentElement;
+      item.classList.toggle('active');
+    }
+  </script>
+  <script src="js/app.js"></script>
+</body>
+</html>

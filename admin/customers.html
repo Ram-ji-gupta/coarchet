@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Customers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="mobile-header">
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+<h2>🧶 WoolCraft</h2>
+</div>
+
+<div class="sidebar">
+  <h2 id="desktopLogo">
+🧶 WoolCraft
+</h2>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="customers.html">Customers</a>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+<div class="content">
+    <h1>Customers</h1>
+    <button class="save-btn" onclick="window.location='customers.html'">Customers</button>
+    <button class="save-btn" onclick="window.location='orders.html'">Orders</button>
+    <div id="customerList"></div>
+
+  </div>
+
+
+  <script src="js/admin.js"></script>
+  <script src="js/customers.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/globalSettings.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+function toggleDarkMode(){
+  const isDark = localStorage.getItem("darkMode")==="true";
+  localStorage.setItem("darkMode", String(!isDark));
+  document.body.classList.toggle("dark-mode", !isDark);
+}
+  </script>
+
+  <button class="save-btn" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+
+  <script>
+if(localStorage.getItem("darkMode")==="true"){
+  document.body.classList.add("dark-mode");
+}
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Product</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- Mobile Menu Button -->
+<div class="mobile-header">
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+<h2>🧶 WoolCraft</h2>
+</div>
+
+<div class="sidebar">
+<h2 id="desktopLogo">
+🧶 WoolCraft
+</h2>
+<input
+type="text"
+id="productSearch"
+placeholder="Search Products..."
+onkeyup="searchProducts()">
+
+<a href="dashboard.html">
+Dashboard
+</a>
+
+<a href="products.html">
+Products
+</a>
+
+<a href="add-product.html"
+class="active">
+Add Product
+</a>
+
+<button onclick="logout()">
+Logout
+</button>
+
+</div>
+
+<!-- Main Content -->
+<div class="content">
+
+<h1>Add Product</h1>
+
+<input
+type="text"
+id="name"
+placeholder="Name">
+
+<select id="category" style="cursor:pointer;">
+  <option value="Apparels">Apparels</option>
+  <option value="Knitted">Knitted</option>
+  <option value="Bags">Bags</option>
+  <option value="Decorative Accessories">Decorative Accessories</option>
+  <option value="Woven">Woven</option>
+  <option value="Hanging Decorations">Hanging Decorations</option>
+  <option value="Gift Sets">Gift Sets</option>
+</select>
+
+<input
+type="number"
+id="price"
+placeholder="Price">
+
+<input
+type="file"
+id="imageFile"
+accept="image/*">
+
+<br><br>
+
+<img
+id="preview"
+style="max-width:200px;display:none;"
+alt="Image preview">
+
+<textarea
+id="description"
+placeholder="Description">
+</textarea>
+
+<input
+type="number"
+id="stock"
+placeholder="Stock Quantity">
+
+<button onclick="saveProduct()">
+Save Product
+</button>
+
+</div>
+
+<script src="js/admin.js"></script>
+<script src="js/imageUpload.js"></script>
+<script src="js/products.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/globalSettings.js"></script>
+<script src="js/auth.js"></script>
+
+<script>
+
+if(
+localStorage.getItem("darkMode")
+==="true"
+){
+
+document.body.classList.add(
+"dark-mode"
+);
+
+}
+
+</script>
+
+</body>
+</html>

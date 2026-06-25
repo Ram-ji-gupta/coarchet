@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WoolCraft Studio — Beautiful handmade wool flowers, headbands, brooches, Kanha dresses and custom gifts. Shop premium handcrafted wool products online.">
+  <meta name="keywords" content="handmade wool crafts, wool flowers, headbands, brooches, Kanha dresses, custom gifts, handcrafted">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#7a4f3d">
+  <link rel="canonical" href="https://woolcraftstudio.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="WoolCraft Studio | Handmade Wool Crafts">
+  <meta property="og:description" content="Beautiful handmade wool flowers, headbands, brooches, Kanha dresses and custom gifts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://woolcraftstudio.com/">
+  <meta property="og:image" content="https://woolcraftstudio.com/images/Sunflower.webp">
+  <meta property="og:site_name" content="WoolCraft Studio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WoolCraft Studio | Handmade Wool Crafts">
+  <meta name="twitter:description" content="Beautiful handmade wool flowers, headbands, brooches, Kanha dresses and custom gifts.">
+  <meta name="twitter:image" content="https://woolcraftstudio.com/images/Sunflower.webp">
+
+  <title>WoolCraft Studio | Handmade Wool Crafts</title>
+  <link rel="icon" href="images/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "WoolCraft Studio",
+    "url": "https://woolcraftstudio.com/",
+    "description": "Handmade wool flowers, headbands, brooches, Kanha dresses and custom gifts.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://woolcraftstudio.com/products.html?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "WoolCraft Studio",
+    "description": "Handmade wool crafts — flowers, headbands, brooches, Kanha dresses & gifts.",
+    "url": "https://woolcraftstudio.com/",
+    "telephone": "+917973856211",
+    "priceRange": "₹₹"
+  }
+  </script>
+
+  <!-- Dark mode (must load before render to prevent FOUC) -->
+  <script src="js/dark-mode.js"></script>
+</head>
+<body>
+
+  <!-- Skip link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo" aria-label="WoolCraft Studio Home">
+      🧶 WoolCraft Studio
+    </a>
+
+    <button class="mobile-menu" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+      ☰
+    </button>
+
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="cart.html" aria-label="Shopping cart">🛒 (<span id="cartCount">0</span>)</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle" class="nav-filter" onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section class="hero fade-up">
+      <h1>Handmade Wool Crafts Made With Love</h1>
+      <p>Beautiful handmade wool flowers, headbands, brooches, Kanha dresses, and customized gifts — crafted with care using premium materials.</p>
+      <a href="products.html" class="btn" id="heroShopBtn">Shop Now</a>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories" aria-label="Product categories">
+      <h2>Shop By Category</h2>
+      <div class="category-grid">
+        <a href="products.html?cat=Headbands" class="category-card">
+          <img src="images/Hand_band.webp" alt="Handmade wool headbands collection" width="400" height="220" loading="lazy" decoding="async">
+          <h3>Headbands</h3>
+        </a>
+        <a href="products.html?cat=Wool+Flowers" class="category-card">
+          <img src="images/Sunflower.webp" alt="Handmade wool flowers collection" width="400" height="220" loading="lazy" decoding="async">
+          <h3>Wool Flowers</h3>
+        </a>
+        <a href="products.html?cat=Brooches" class="category-card">
+          <img src="images/Black Butterfly.webp" alt="Handmade flower brooches collection" width="400" height="220" loading="lazy" decoding="async">
+          <h3>Brooches</h3>
+        </a>
+        <a href="products.html?cat=Kanha+Dresses" class="category-card">
+          <img src="images/Red-Khana-dress.webp" alt="Handmade Kanha dresses collection" width="400" height="220" loading="lazy" decoding="async">
+          <h3>Kanha Dresses</h3>
+        </a>
+      </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="featured" aria-label="Featured products">
+      <h2>Featured Products</h2>
+      <div class="product-grid" id="featuredProducts">
+        <!-- Generated by JS -->
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="why-us" aria-label="Why choose us">
+      <h2>Why Choose Us?</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <h3>🧵 100% Handmade</h3>
+          <p>Every product is individually and carefully crafted with attention to detail.</p>
+        </div>
+        <div class="product-card">
+          <h3>✨ Premium Quality</h3>
+          <p>We use only soft wool and durable materials for long-lasting beauty.</p>
+        </div>
+        <div class="product-card">
+          <h3>🎨 Custom Orders</h3>
+          <p>Personalized colors, sizes and designs available on request.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 WoolCraft Studio. All rights reserved.</p>
+    <p><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="faq.html">FAQ</a></p>
+  </footer>
+
+  <!-- Floating Instagram & WhatsApp -->
+  <a href="https://www.instagram.com/croch_etgallery706?igsh=YTJ6MTA1MXlzYXkz" class="floating-instagram" target="_blank" rel="noopener noreferrer" aria-label="Follow on Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://wa.me/917973856211" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">💬</a>
+
+  <!-- Decorative orbs -->
+  <div class="orb orb1" aria-hidden="true"></div>
+  <div class="orb orb2" aria-hidden="true"></div>
+  <div class="orb orb3" aria-hidden="true"></div>
+
+  <!-- JS -->
+  <script src="js/config.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

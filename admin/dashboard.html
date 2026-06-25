@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- Mobile Menu Button -->
+<div class="mobile-header">
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+<h2>🧶 WoolCraft</h2>
+</div>
+
+<div class="sidebar">
+<h2 id="desktopLogo">
+🧶 WoolCraft
+</h2>
+    <a href="dashboard.html" class="active">
+        Dashboard
+    </a>
+
+    <a href="products.html">
+        Products
+    </a>
+
+    <a href="orders.html">
+        Orders
+    </a>
+
+    <a href="customers.html">
+        Customers
+    </a>
+
+    <a href="settings.html">
+        Settings
+    </a>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+
+</div>
+
+
+<!-- Content -->
+<div class="content">
+
+    <h1 style="margin-bottom:30px;">
+Dashboard
+</h1>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Products</h3>
+            <h2 id="totalProducts">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Orders</h3>
+            <h2 id="totalOrders">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Customers</h3>
+            <h2 id="totalCustomers">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Revenue</h3>
+            <h2 id="revenue">₹0</h2>
+        </div>
+
+    </div>
+
+    <h2 style="margin-top:40px;">
+        Recent Orders
+    </h2>
+
+    <div id="recentOrders"></div>
+
+</div>
+
+
+<script src="js/admin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/globalSettings.js"></script>
+<script src="js/auth.js"></script>
+
+<script>
+if(localStorage.getItem("darkMode")==="true"){
+    document.body.classList.add("dark-mode");
+}
+</script>
+
+</body>
+</html>
