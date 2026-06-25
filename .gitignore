@@ -34,5 +34,6 @@ Thumbs.db
 *.temp
 
 # Database backups (may contain sensitive data)
-database/woolcraft-database.sql
-woolcraft-full.sql
+database/croch_etgallery-database.sql
+croch_etgallery-full.sql
+

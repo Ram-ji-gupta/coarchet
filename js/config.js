@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Centralized Configuration
+ * croch_etgallery — Centralized Configuration
  * All hardcoded values (API URLs, WhatsApp number, etc.) live here.
  */
 const WC = (() => {
@@ -10,7 +10,7 @@ const WC = (() => {
     API_BASE: isLocal ? "http://localhost:5000" : "",
     WA_NUMBER: "917973856211",
     WA_DISPLAY: "+91 79738 56211",
-    BRAND: "WoolCraft Studio",
+    BRAND: "croch_etgallery",
     YEAR: new Date().getFullYear(),
     CURRENCY: "₹",
     /** Build a full API URL */
@@ -29,3 +29,4 @@ const WC = (() => {
     }
   });
 })();
+

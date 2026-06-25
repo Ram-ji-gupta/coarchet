@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Shop Page Controller
+ * croch_etgallery — Shop Page Controller
  * Wires search, category filtering, and product rendering.
  */
 (function () {
@@ -140,3 +140,4 @@
     init();
   }
 })();
+

@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Home Page Script
+ * croch_etgallery — Home Page Script
  * Renders the featured products list and adds subtle interactive animations.
  */
 (function () {

@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Page Loader
+ * croch_etgallery — Page Loader
  * Displays a branded loading screen and fades out when the page is ready.
  */
 (function () {
@@ -18,7 +18,7 @@
           <div class="wc-loader__ball"></div>
           <div class="wc-loader__thread"></div>
         </div>
-        <p class="wc-loader__text">WoolCraft Studio</p>
+        <p class="wc-loader__text">croch_etgallery</p>
       </div>`;
 
     document.body.prepend(overlay);
@@ -43,3 +43,4 @@
     setTimeout(dismissLoader, 400);
   });
 })();
+

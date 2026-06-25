@@ -1,14 +1,16 @@
-# WoolCraft Studio — Complete Deployment Guide
+# croch_etgallery — Complete Deployment Guide
 
 ---
 
-## YOUR LOCAL CREDENTIALS (From .env)
-- MySQL Host: `localhost`
-- MySQL Port: `3310`
-- MySQL User: `woolcraft_user` or `root`
-- MySQL Password: `rAmjig861@`
-- MySQL Database: `woolcraft`
+## YOUR LOCAL CREDENTIALS (From `backend/.env` or `backend/.env.example`)
+- MySQL Host: `127.0.0.1`
+- MySQL Port: `3311`
+- MySQL User: `croch_etgallery_user`
+- MySQL Password: `croch_etgallery_password`
+- MySQL Database: `croch_etgallery`
 - JWT Secret: `change_this_to_a_strong_secret_key_in_production_123!@#$`
+
+> Tip: Use the values from `backend/.env` or update `backend/.env.example` before deploying.
 
 ---
 
@@ -29,19 +31,21 @@ Follow these steps if you only have the MySQL console:
 
 3. **Export your database**:
    ```cmd
-   mysqldump -u root -prAmjig861@ woolcraft > woolcraft-database.sql
+   mysqldump -u root -p croch_etgallery > croch_etgallery-database.sql
    ```
+   - Enter your local MySQL root password when prompted.
+   - If your root account has no password, omit `-p`.
 
-4. Your database is now saved as `woolcraft-database.sql` in `C:\xampp\mysql\bin`—copy this to your project folder!
+4. Your database is now saved as `croch_etgallery-database.sql` in `C:\xampp\mysql\bin`—copy this to your project folder!
 
 ### Option 2: Using phpMyAdmin
 
 If you have phpMyAdmin:
 1. Open `http://localhost/phpmyadmin`
-2. Select your database `woolcraft`
+2. Select your database `croch_etgallery`
 3. Click **Export**
 4. Choose "Quick" export method, format "SQL"
-5. Click **Go** and save as `woolcraft-database.sql`
+5. Click **Go** and save as `croch_etgallery-database.sql`
 
 ---
 
@@ -58,7 +62,8 @@ If you have phpMyAdmin:
    *.log
    .DS_Store
    ```
-3. **Commit your code** and push to your Git repository
+3. **Use `.env.example` as a template** for production environment variables, but never commit the real `backend/.env` file.
+4. **Commit your code** and push to your Git repository
 
 ---
 
@@ -91,7 +96,7 @@ If you have phpMyAdmin:
 1. Go to https://planetscale.com, sign up, and create a new database
 2. In PlanetScale dashboard:
    - Click "Connect" → Get your credentials (host, user, password, database name)
-   - Click "Import" → Upload your `woolcraft-database.sql` file
+   - Click "Import" → Upload your `croch_etgallery-database.sql` file
 3. Save your PlanetScale credentials for later
 
 ### Part 3: Deploy Backend to Render
@@ -112,6 +117,9 @@ If you have phpMyAdmin:
    DB_NAME=your-planetscale-database
    JWT_SECRET=your-strong-jwt-secret-key-here
    ```
+   - Use the values exactly as provided in the PlanetScale dashboard.
+   - Do not reuse local values like `127.0.0.1`, `3311`, or `croch_etgallery_password` in production.
+   - You can use `backend/.env.example` as a template for the environment variables; just replace the placeholder values with your provider credentials.
 6. Click "Create Web Service"!
 7. Once deployed, you'll get a backend URL like `https://your-project.onrender.com`
 
@@ -148,7 +156,7 @@ If you have phpMyAdmin:
 2. Create a new database and user
 3. Assign the user to the database with ALL PRIVILEGES
 4. Go to **phpMyAdmin** in cPanel
-5. Select your new database → Click **Import** → Upload `woolcraft-database.sql`
+5. Select your new database → Click **Import** → Upload `croch_etgallery-database.sql`
 
 ### Step 3: Configure Backend in CPanel
 1. Update `backend/.env` with your cPanel MySQL credentials
@@ -187,3 +195,5 @@ If you have phpMyAdmin:
 
 - Check your hosting provider's documentation
 - If something breaks, check server logs!
+
+

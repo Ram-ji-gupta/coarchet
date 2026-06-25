@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Product Service
+ * croch_etgallery — Product Service
  * Fetches and maintains product state, dispatching a custom event on load.
  */
 let products = [];
@@ -20,3 +20,4 @@ async function loadProducts() {
 
 // Start loading state immediately
 loadProducts();
+

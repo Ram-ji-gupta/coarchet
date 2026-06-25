@@ -7,7 +7,7 @@ const dbConfig = {
   port: Number(process.env.DB_PORT ? process.env.DB_PORT.trim() : "") || 3306,
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
-  database: process.env.DB_NAME || "woolcraft"
+  database: process.env.DB_NAME || "croch_etgallery"
 };
 
 let pool = null;
@@ -152,13 +152,13 @@ async function importSqlSchema() {
     // explicit env override (absolute or relative)
     process.env.DB_INIT_SQL_PATH ? path.resolve(process.env.DB_INIT_SQL_PATH) : null,
     // backend/config -> ../database (legacy/incorrect path that existed before)
-    path.join(__dirname, "../database/woolcraft-full.sql"),
+    path.join(__dirname, "../database/croch_etgallery-full.sql"),
     // backend/config -> ../../database (repo-root/database)
-    path.join(__dirname, "../../database/woolcraft-full.sql"),
+    path.join(__dirname, "../../database/croch_etgallery-full.sql"),
     // repository root -> database (when running from project root)
-    path.join(process.cwd(), "database/woolcraft-full.sql"),
+    path.join(process.cwd(), "database/croch_etgallery-full.sql"),
     // fallback alternate filename
-    path.join(__dirname, "../../database/woolcraft-database.sql")
+    path.join(__dirname, "../../database/croch_etgallery-database.sql")
   ].filter(Boolean);
 
   const sqlPath = candidates.find((p) => fs.existsSync(p));
@@ -183,10 +183,10 @@ async function importSqlSchema() {
 function resolveSqlInitPath() {
   const candidates = [
     process.env.DB_INIT_SQL_PATH ? path.resolve(process.env.DB_INIT_SQL_PATH) : null,
-    path.join(__dirname, "../database/woolcraft-full.sql"),
-    path.join(__dirname, "../../database/woolcraft-full.sql"),
-    path.join(process.cwd(), "database/woolcraft-full.sql"),
-    path.join(__dirname, "../../database/woolcraft-database.sql")
+    path.join(__dirname, "../database/croch_etgallery-full.sql"),
+    path.join(__dirname, "../../database/croch_etgallery-full.sql"),
+    path.join(process.cwd(), "database/croch_etgallery-full.sql"),
+    path.join(__dirname, "../../database/croch_etgallery-database.sql")
   ].filter(Boolean);
   return candidates.find((p) => fs.existsSync(p)) || null;
 }
@@ -202,3 +202,5 @@ module.exports = {
   query: (sql, params) => getPool().query(sql, params),
   resolveSqlInitPath
 };
+
+

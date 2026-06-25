@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Shopping Cart Controller
+ * croch_etgallery — Shopping Cart Controller
  * Manages cart logic, local storage caching, rendering, and count indicators.
  */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -164,3 +164,4 @@ function removeItem(index) {
     if (action === "remove") return removeItem(index);
   });
 })();
+

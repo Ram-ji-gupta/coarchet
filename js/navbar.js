@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Navigation Bar Controller
+ * croch_etgallery — Navigation Bar Controller
  * Handles mobile hamburger menu toggle and updates accessibility state.
  */
 function toggleMobileMenu() {

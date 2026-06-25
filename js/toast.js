@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Toast Notifications
+ * croch_etgallery — Toast Notifications
  * Replaces alert() with sleek, non-blocking toasts.
  *
  * Usage:
@@ -55,3 +55,4 @@
     }, durationMs);
   };
 })();
+

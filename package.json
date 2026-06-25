@@ -1,7 +1,7 @@
 {
   "name": "wollen-craft",
   "version": "1.0.0",
-  "description": "WoolCraft static e‑commerce site",
+  "description": "croch_etgallery static e‑commerce site",
   "main": "index.html",
   "scripts": {
     "build": "node scripts/build.js",
@@ -18,3 +18,4 @@
     "terser": "^5.48.0"
   }
 }
+

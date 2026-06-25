@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Checkout Controller
+ * croch_etgallery — Checkout Controller
  * Form validation, order payload creation, API posting, and WhatsApp confirmation redirect.
  */
 async function placeOrder() {
@@ -86,7 +86,7 @@ async function placeOrder() {
 
     const customRequirementText = customRequirement ? `\n\nCustom Request:\n${customRequirement}` : "";
 
-    const waText = `Hello WoolCraft Studio! 🧶\n\nI have placed a new order!\n\nOrder ID: ${orderId || "N/A"}\nStatus: ${status}\n\nItems Ordered:\n${itemsText}${customRequirementText}\n\nThank you!`;
+    const waText = `Hello croch_etgallery! 🧶\n\nI have placed a new order!\n\nOrder ID: ${orderId || "N/A"}\nStatus: ${status}\n\nItems Ordered:\n${itemsText}${customRequirementText}\n\nThank you!`;
     
     // Redirect to WhatsApp chat after brief timeout so user sees success toast
     setTimeout(() => {
@@ -99,3 +99,4 @@ async function placeOrder() {
     showToast("Order failed. Please try again or contact support.", "error");
   }
 }
+

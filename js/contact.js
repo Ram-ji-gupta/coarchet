@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Contact Page Controller
+ * croch_etgallery — Contact Page Controller
  * Validates fields, sends contact messages to the backend API, and displays modern toast alerts.
  */
 async function sendContactMessage(e) {
@@ -49,3 +49,4 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', sendContactMessage);
   }
 });
+

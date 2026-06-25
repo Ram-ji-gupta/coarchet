@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — WhatsApp Direct Order
+ * croch_etgallery — WhatsApp Direct Order
  * Allows placing an order directly via WhatsApp from the cart.
  */
 function sendWhatsAppOrder() {
@@ -8,7 +8,7 @@ function sendWhatsAppOrder() {
     return;
   }
 
-  let message = "Hello WoolCraft Studio! 🧶\n\nI would like to place an order for:\n\n";
+  let message = "Hello croch_etgallery! 🧶\n\nI would like to place an order for:\n\n";
   let total = 0;
 
   cart.forEach((item) => {

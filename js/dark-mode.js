@@ -1,5 +1,5 @@
 /**
- * WoolCraft Studio — Dark Mode
+ * croch_etgallery — Dark Mode
  * Single source for all pages — replaces inline <script> duplicates.
  */
 (function () {
@@ -44,3 +44,4 @@
     }
   });
 })();
+

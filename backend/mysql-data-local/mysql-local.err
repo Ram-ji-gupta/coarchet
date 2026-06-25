@@ -8,3 +8,15 @@
 2026-06-25T19:05:12.475852Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060
 2026-06-25T19:05:12.475967Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe: ready for connections. Version: '8.0.45'  socket: ''  port: 3311  MySQL Community Server - GPL.
 2026-06-25T19:09:07.345743Z 8 [Warning] [MY-013360] [Server] Plugin mysql_native_password reported: ''mysql_native_password' is deprecated and will be removed in a future release. Please use caching_sha2_password instead'
+2026-06-25T20:37:25.365920Z 0 [Warning] [MY-010915] [Server] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2026-06-25T20:37:25.366644Z 0 [Warning] [MY-010918] [Server] 'default_authentication_plugin' is deprecated and will be removed in a future release. Please use authentication_policy instead.
+2026-06-25T20:37:25.366679Z 0 [System] [MY-010116] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe (mysqld 8.0.45) starting as process 18060
+2026-06-25T20:37:25.408414Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2026-06-25T20:37:26.204758Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2026-06-25T20:37:26.583186Z 0 [System] [MY-010229] [Server] Starting XA crash recovery...
+2026-06-25T20:37:26.589174Z 0 [System] [MY-010232] [Server] XA crash recovery finished.
+2026-06-25T20:37:26.658668Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2026-06-25T20:37:26.660176Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2026-06-25T20:37:26.773860Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060
+2026-06-25T20:37:26.774151Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe: ready for connections. Version: '8.0.45'  socket: ''  port: 3311  MySQL Community Server - GPL.
+2026-06-25T20:38:11.662881Z 8 [Warning] [MY-013360] [Server] Plugin mysql_native_password reported: ''mysql_native_password' is deprecated and will be removed in a future release. Please use caching_sha2_password instead'

@@ -4,9 +4,9 @@
     const conn = await mysql.createConnection({
       host: '127.0.0.1',
       port: 3311,
-      user: 'woolcraft_user',
-      password: 'woolcraft_password',
-      database: 'woolcraft'
+      user: 'croch_etgallery_user',
+      password: 'croch_etgallery_password',
+      database: 'croch_etgallery'
     });
 
     const [before] = await conn.query('SELECT * FROM customers ORDER BY id');
@@ -31,3 +31,4 @@
     process.exit(1);
   }
 })();
+
