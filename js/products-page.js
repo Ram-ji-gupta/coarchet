@@ -33,9 +33,31 @@
 
     let products = [];
     try {
-      const res = await fetch(WC.api('/api/products'));
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      products = await res.json();
+      // Use Supabase client
+      const SUPABASE_URL = 'https://owzsyodcmdwnfpoqkxyx.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA';
+
+      if (!window.supabaseClient) {
+        if (typeof window.supabase === 'undefined') {
+          await new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+          });
+        }
+        const { createClient } = window.supabase;
+        window.supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+
+      const { data, error } = await window.supabaseClient
+        .from('products')
+        .select('*')
+        .order('id', { ascending: false });
+
+      if (error) throw error;
+      products = data || [];
 
       // Keep compatibility with global product state
       window.products = products;

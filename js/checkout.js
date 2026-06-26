@@ -1,7 +1,33 @@
 /**
  * croch_etgallery — Checkout Controller
- * Form validation, order payload creation, API posting, and WhatsApp confirmation redirect.
+ * Form validation, order payload creation, and WhatsApp confirmation redirect.
  */
+
+// Supabase configuration
+const SUPABASE_URL = 'https://owzsyodcmdwnfpoqkxyx.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA';
+
+let supabaseClient = null;
+
+async function initSupabase() {
+  if (supabaseClient) return supabaseClient;
+
+  if (typeof window.supabase === 'undefined') {
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+
+  const { createClient } = window.supabase;
+  supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  window.supabaseClient = supabaseClient;
+  return supabaseClient;
+}
+
 async function placeOrder() {
   const nameEl = document.getElementById('checkoutName');
   const phoneEl = document.getElementById('checkoutPhone');
@@ -41,38 +67,68 @@ async function placeOrder() {
     return;
   }
 
-  const orderPayload = {
-    customer: name,
-    phone,
-    email,
-    address,
-    custom_requirement: customRequirement,
-    items
-  };
-
   showToast("Processing order...", "info");
 
   try {
-    const res = await fetch(WC.api("/api/orders"), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(orderPayload)
-    });
+    await initSupabase();
 
-    if (!res.ok) {
-      const errorMsg = await res.text().catch(() => "");
-      throw new Error(`Order posting failed (HTTP ${res.status}): ${errorMsg}`);
+    // Calculate total
+    let total = 0;
+    items.forEach(item => total += Number(item.price) * Number(item.qty));
+
+    // Check if customer exists
+    const { data: existingCustomer } = await supabaseClient
+      .from('customers')
+      .select('id')
+      .eq('phone', phone)
+      .maybeSingle();
+
+    // Create customer if not exists
+    if (!existingCustomer) {
+      await supabaseClient
+        .from('customers')
+        .insert([{ name, phone, email, address }]);
     }
 
-    const result = await res.json().catch(() => ({}));
+    // Create order
+    const { data: orderData, error: orderError } = await supabaseClient
+      .from('orders')
+      .insert([{
+        customer: name,
+        phone,
+        email,
+        address,
+        custom_requirement: customRequirement || null,
+        status: 'Pending',
+        total: total.toFixed(2)
+      }])
+      .select();
 
-    // Clear cart storage immediately upon successful post
+    if (orderError) throw orderError;
+
+    const orderId = orderData && orderData[0] ? orderData[0].id : '';
+
+    // Get product details for WhatsApp message
+    const itemsDetailed = [];
+    for (const item of items) {
+      const { data: product } = await supabaseClient
+        .from('products')
+        .select('name, description')
+        .eq('id', item.id)
+        .maybeSingle();
+
+      itemsDetailed.push({
+        id: item.id,
+        name: product?.name || `Product #${item.id}`,
+        description: product?.description || "",
+        price: item.price,
+        qty: item.qty
+      });
+    }
+
+    // Clear cart storage
     localStorage.removeItem("cart");
     showToast("Order Placed Successfully!", "success");
-
-    const orderId = result?.orderId || "";
-    const status = result?.status || "Pending";
-    const itemsDetailed = Array.isArray(result?.itemsDetailed) ? result.itemsDetailed : [];
 
     const itemsText = itemsDetailed.length
       ? itemsDetailed
@@ -86,9 +142,9 @@ async function placeOrder() {
 
     const customRequirementText = customRequirement ? `\n\nCustom Request:\n${customRequirement}` : "";
 
-    const waText = `Hello croch_etgallery! 🧶\n\nI have placed a new order!\n\nOrder ID: ${orderId || "N/A"}\nStatus: ${status}\n\nItems Ordered:\n${itemsText}${customRequirementText}\n\nThank you!`;
-    
-    // Redirect to WhatsApp chat after brief timeout so user sees success toast
+    const waText = `Hello croch_etgallery! 🧶\n\nI have placed a new order!\n\nOrder ID: ${orderId || "N/A"}\nStatus: Pending\n\nItems Ordered:\n${itemsText}${customRequirementText}\n\nThank you!`;
+
+    // Redirect to WhatsApp chat
     setTimeout(() => {
       window.open(WC.waLink(waText), "_blank", "noopener,noreferrer");
       window.location.href = "index.html";
@@ -99,4 +155,3 @@ async function placeOrder() {
     showToast("Order failed. Please try again or contact support.", "error");
   }
 }
-

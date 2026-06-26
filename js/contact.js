@@ -1,6 +1,6 @@
 /**
  * croch_etgallery — Contact Page Controller
- * Validates fields, sends contact messages to the backend API, and displays modern toast alerts.
+ * Validates fields and redirects to WhatsApp for contact.
  */
 async function sendContactMessage(e) {
   e.preventDefault();
@@ -21,26 +21,15 @@ async function sendContactMessage(e) {
     return;
   }
 
-  showToast("Sending message...", "info");
+  // Build WhatsApp message
+  const waText = `Hello croch_etgallery! 🧶\n\nNew Contact Inquiry:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\nMessage:\n${message}`;
 
-  try {
-    const res = await fetch(WC.api('/api/contact'), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, phone, message })
-    });
+  showToast('Redirecting to WhatsApp...', 'success');
+  if (form) form.reset();
 
-    if (!res.ok) {
-      const msg = await res.text().catch(() => "");
-      throw new Error(`Contact message failed to send: ${res.status} ${msg}`);
-    }
-
-    showToast('Your message has been sent successfully!', 'success');
-    if (form) form.reset();
-  } catch (err) {
-    console.error("[contact] Error sending message:", err);
-    showToast('Failed to send message. Please try again.', 'error');
-  }
+  setTimeout(() => {
+    window.open(WC.waLink(waText), "_blank", "noopener,noreferrer");
+  }, 800);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

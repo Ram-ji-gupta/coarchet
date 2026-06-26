@@ -80,6 +80,25 @@
   <script src="js/cart.js"></script>
 
   <script>
+    const SUPABASE_URL = 'https://owzsyodcmdwnfpoqkxyx.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA';
+
+    async function initSupabase() {
+      if (window.supabaseClient) return window.supabaseClient;
+      if (typeof window.supabase === 'undefined') {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      }
+      const { createClient } = window.supabase;
+      window.supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      return window.supabaseClient;
+    }
+
     async function loadProductFromQuery() {
       const params = new URLSearchParams(window.location.search);
       const id = Number(params.get('id'));
@@ -98,10 +117,15 @@
       }
 
       try {
-        const res = await fetch(WC.api(`/api/products/${id}`));
-        if (!res.ok) throw new Error(`Product not found (HTTP ${res.status})`);
-        const p = await res.json();
-        if (!p || !p.id) throw new Error('Invalid product data');
+        await initSupabase();
+        const { data: p, error } = await window.supabaseClient
+          .from('products')
+          .select('*')
+          .eq('id', id)
+          .maybeSingle();
+
+        if (error) throw error;
+        if (!p || !p.id) throw new Error('Product not found');
 
         const imgSrc = WC.img(p.image);
 
@@ -123,7 +147,6 @@
 
         document.title = `${p.name || 'Product'} – croch_etgallery`;
 
-        // Canonical URL for product
         let canonical = document.querySelector('link[rel="canonical"]');
         if (!canonical) {
           canonical = document.createElement('link');
