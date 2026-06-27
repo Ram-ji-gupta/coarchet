@@ -114,22 +114,40 @@ async function handleUpdate(sql, params) {
   if (!tableMatch) throw new Error(`Cannot parse table from SQL: ${sql}`);
   const table = tableMatch[1];
 
-  // Extract WHERE clause for id
-  const whereMatch = sql.match(/WHERE\s+id\s*=\s*\?/i);
+  // Extract WHERE clause for id (allow flexible whitespace/newlines)
+  const whereMatch = sql.match(/WHERE\s+id\s*=\s*\?/is);
   if (!whereMatch) throw new Error(`Only id-based UPDATE supported: ${sql}`);
 
   const id = params[params.length - 1]; // Last param is id
 
-  // Extract SET clause
-  const setMatch = sql.match(/SET\s+(.+?)\s+WHERE/i);
+  // Extract SET clause (everything between SET and WHERE)
+  const setMatch = sql.match(/SET\s+(.+?)\s+WHERE/is);
   if (!setMatch) throw new Error(`Cannot parse SET from SQL: ${sql}`);
 
   const setClause = setMatch[1];
-  const columns = setClause.split(",").map(c => c.trim().replace(/\s*=\s*\?/, ""));
+
+  // Parse "col = ?, col2 = ?" into column names (trim optional backticks)
+  // This is intentionally tolerant of whitespace/newlines.
+  const assignments = setClause
+    .split(",")
+    .map(s => s.trim())
+    .filter(Boolean)
+    .map((assignment) => {
+      // capture left side of "=" and strip backticks/quotes
+      const m = assignment.match(/^([`\"']?\w+[`\"']?)\s*=\s*\?$/i);
+      if (!m) {
+        throw new Error(`Cannot parse UPDATE assignment: ${assignment}`);
+      }
+      return m[1].replace(/[`\"']/g, "");
+    });
+
+  if (assignments.length > params.length - 1) {
+    throw new Error(`UPDATE params mismatch. assignments=${assignments.length}, params=${params.length}`);
+  }
 
   // Build update object
   const updateData = {};
-  columns.forEach((col, i) => {
+  assignments.forEach((col, i) => {
     updateData[col] = params[i];
   });
 
