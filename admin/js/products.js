@@ -3,326 +3,218 @@
 // ==========================
 
 let allProducts = [];
+let supabaseClient = null;
 
+async function initSupabase() {
+  if (supabaseClient) return supabaseClient;
+
+  if (typeof window.supabase === 'undefined') {
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+
+  const { createClient } = window.supabase;
+  supabaseClient = createClient(
+    'https://owzsyodcmdwnfpoqkxyx.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA'
+  );
+  return supabaseClient;
+}
+
+// ==========================
+// IMAGE URL HELPER
+// ==========================
+
+function getImageUrl(image) {
+  if (!image) return 'https://via.placeholder.com/150';
+  if (image.startsWith('http')) return image;
+  // For Supabase storage or placeholder
+  return image;
+}
 
 // ==========================
 // DISPLAY PRODUCTS
 // ==========================
 
-function displayProducts(products){
+function displayProducts(products) {
+  const container = document.getElementById("productList");
+  if (!container) return;
 
-const container =
-document.getElementById(
-"productList"
-);
+  container.innerHTML = "";
 
-if(!container) return;
-
-container.innerHTML = "";
-
-products.forEach(product=>{
-
-container.innerHTML += `
-
-<div class="product-item">
-
-<img
-src="http://localhost:5000/uploads/${product.image}">
-
-<h3>
-${product.name}
-</h3>
-
-<div class="price">
-₹${product.price}
-</div>
-
-<div class="category">
-${product.category}
-</div>
-
-${product.description ? `<div class="description">${product.description}</div>` : ''}
-
-<div class="stock">
-Stock : ${product.stock}
-</div>
-
-<div class="product-buttons">
-
-<button
-class="edit-btn"
-onclick="editProduct(${product.id})">
-
-Edit
-
-</button>
-
-<button
-class="delete-btn"
-onclick="deleteProduct(${product.id})">
-
-Delete
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
+  products.forEach(product => {
+    container.innerHTML += `
+      <div class="product-item">
+        <img src="${getImageUrl(product.image)}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <div class="price">₹${product.price}</div>
+        <div class="category">${product.category || ''}</div>
+        ${product.description ? `<div class="description">${product.description}</div>` : ''}
+        <div class="stock">Stock : ${product.stock || 0}</div>
+        <div class="product-buttons">
+          <button class="edit-btn" onclick="editProduct(${product.id})">Edit</button>
+          <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
+        </div>
+      </div>
+    `;
+  });
 }
-
 
 // ==========================
 // LOAD PRODUCTS
 // ==========================
 
-async function loadProducts(){
+async function loadProducts() {
+  try {
+    await initSupabase();
 
-try{
+    const { data: products, error } = await supabaseClient
+      .from('products')
+      .select('*')
+      .order('id', { ascending: true });
 
-const response =
-await fetch(
-"http://localhost:5000/api/products"
-);
+    if (error) throw error;
 
-allProducts =
-await response.json();
-
-displayProducts(
-allProducts
-);
-
+    allProducts = products || [];
+    displayProducts(allProducts);
+  } catch (error) {
+    console.log(error);
+  }
 }
-
-catch(error){
-
-console.log(error);
-
-}
-
-}
-
 
 // ==========================
 // SEARCH PRODUCTS
 // ==========================
 
-function searchProducts(){
+function searchProducts() {
+  const input = document.getElementById("productSearch");
+  const clearBtn = document.getElementById("clearSearchBtn");
 
-const input =
-document.getElementById(
-"productSearch"
-);
+  if (!input) return;
 
-const clearBtn = document.getElementById("clearSearchBtn");
+  const keyword = input.value.toLowerCase();
 
-if(!input) return;
-
-const keyword =
-input.value.toLowerCase();
-
-// show/hide clear button
-if(clearBtn){
-clearBtn.style.display = keyword ? "inline-block" : "none";
-}
-
-if(!keyword){
-// Empty search => show all
-return displayProducts(allProducts);
-}
-
-const filtered =
-allProducts.filter(product=>
-
-(product.name || "").toLowerCase().includes(keyword)
-
-||
-
-(product.category || "").toLowerCase().includes(keyword)
-
-);
-
-displayProducts(
-filtered
-);
-
-}
-
-function clearSearch(){
-const input = document.getElementById("productSearch");
-if(input){
-input.value = "";
-}
-const clearBtn = document.getElementById("clearSearchBtn");
-if(clearBtn){
-clearBtn.style.display = "none";
-}
-displayProducts(allProducts);
-}
-
-
-// ==========================
-// SAVE PRODUCT
-// ==========================
-
-async function saveProduct(){
-
-try{
-
-const file =
-document.getElementById(
-"imageFile"
-).files[0];
-
-const formData =
-new FormData();
-
-formData.append(
-"name",
-document.getElementById(
-"name"
-).value
-);
-
-formData.append(
-"price",
-document.getElementById(
-"price"
-).value
-);
-
-formData.append(
-"category",
-document.getElementById(
-"category"
-).value
-);
-
-formData.append(
-"stock",
-document.getElementById(
-"stock"
-).value
-);
-
-formData.append(
-"description",
-document.getElementById(
-"description"
-).value
-);
-
-if(file){
-
-formData.append(
-"image",
-file
-);
-
-}
-
-const token = localStorage.getItem("adminToken");
-
-const response = await fetch(
-  "http://localhost:5000/api/products",
-  {
-    method: "POST",
-    body: formData,
-    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  // show/hide clear button
+  if (clearBtn) {
+    clearBtn.style.display = keyword ? "inline-block" : "none";
   }
-);
 
-const data = await response.json();
+  if (!keyword) {
+    return displayProducts(allProducts);
+  }
 
-console.log(data);
+  const filtered = allProducts.filter(product =>
+    (product.name || "").toLowerCase().includes(keyword) ||
+    (product.category || "").toLowerCase().includes(keyword)
+  );
 
-alert(
-"Product Added Successfully"
-);
-
-window.location =
-"products.html";
-
+  displayProducts(filtered);
 }
 
-catch(error){
-
-console.log(error);
-
-alert(
-"Failed to add product"
-);
-
+function clearSearch() {
+  const input = document.getElementById("productSearch");
+  if (input) {
+    input.value = "";
+  }
+  const clearBtn = document.getElementById("clearSearchBtn");
+  if (clearBtn) {
+    clearBtn.style.display = "none";
+  }
+  displayProducts(allProducts);
 }
-
-}
-
 
 // ==========================
 // DELETE PRODUCT
 // ==========================
 
-async function deleteProduct(id){
+async function deleteProduct(id) {
+  if (!confirm("Delete this product?")) return;
 
-if(
+  try {
+    await initSupabase();
 
-!confirm(
-"Delete this product?"
-)
+    const { error } = await supabaseClient
+      .from('products')
+      .delete()
+      .eq('id', id);
 
-){
+    if (error) throw error;
 
-return;
-
+    alert("Product deleted");
+    loadProducts();
+  } catch (error) {
+    console.log(error);
+    alert("Failed to delete product");
+  }
 }
-
-try{
-const token = localStorage.getItem("adminToken");
-
-const response =
-await fetch(
-
-`http://localhost:5000/api/products/${id}`,
-
-{
-
-method:"DELETE",
-headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-
-}
-
-);
-
-const data =
-await response.json();
-
-console.log(data);
-
-loadProducts();
-
-}
-
-catch(error){
-
-console.log(error);
-
-}
-
-}
-
 
 // ==========================
 // EDIT PRODUCT
 // ==========================
 
-function editProduct(id){
-    window.location = `edit-product?id=${id}`;
+function editProduct(id) {
+  window.location = `edit-product.html?id=${id}`;
 }
 
+// ==========================
+// SAVE PRODUCT (Add New)
+// ==========================
+
+async function saveProduct() {
+  try {
+    await initSupabase();
+
+    const name = document.getElementById("name")?.value;
+    const price = Number(document.getElementById("price")?.value);
+    const category = document.getElementById("category")?.value;
+    const stock = Number(document.getElementById("stock")?.value);
+    const description = document.getElementById("description")?.value;
+
+    if (!name || !price) {
+      alert("Please fill in name and price");
+      return;
+    }
+
+    // Handle image
+    const file = document.getElementById("imageFile")?.files[0];
+    let image = "";
+
+    const insertProduct = async (imageUrl) => {
+      const { error } = await supabaseClient
+        .from('products')
+        .insert([{
+          name,
+          price,
+          category,
+          stock,
+          description,
+          image: imageUrl
+        }]);
+
+      if (error) throw error;
+      alert("Product Added Successfully");
+      window.location = "products.html";
+    };
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        await insertProduct(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      await insertProduct("");
+    }
+  } catch (error) {
+    console.log(error);
+    alert("Failed to add product");
+  }
+}
 
 // ==========================
 // INITIALIZE

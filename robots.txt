@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
-Disallow: /cart.html
-Disallow: /checkout.html
+Disallow: /cart
+Disallow: /checkout
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://woolcraftstudio.com/sitemap.xml
+Sitemap: https://your-domain.com/sitemap.xml

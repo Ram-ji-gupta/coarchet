@@ -1,146 +1,120 @@
-const params =
-new URLSearchParams(
-window.location.search
-);
+let supabaseClient = null;
 
-const id =
-params.get("id");
+async function initSupabase() {
+  if (supabaseClient) return supabaseClient;
+
+  if (typeof window.supabase === 'undefined') {
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+
+  const { createClient } = window.supabase;
+  supabaseClient = createClient(
+    'https://owzsyodcmdwnfpoqkxyx.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA'
+  );
+  return supabaseClient;
+}
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
 if (!id) {
   alert('No product ID provided. Redirecting to products list.');
   window.location = 'products.html';
 }
 
-
 // LOAD PRODUCT
+async function loadProduct() {
+  try {
+    await initSupabase();
 
-async function loadProduct(){
+    const { data: product, error } = await supabaseClient
+      .from('products')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle();
 
-try{
+    if (error) throw error;
+    if (!product) {
+      alert('Product not found');
+      window.location = 'products.html';
+      return;
+    }
 
-const token = localStorage.getItem('adminToken');
-  const response = await fetch(`http://localhost:5000/api/products/${id}`, {
-    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-  });
+    document.getElementById("name").value = product.name || '';
+    document.getElementById("price").value = product.price || '';
+    document.getElementById("stock").value = product.stock || 0;
+    document.getElementById("description").value = product.description || '';
 
-const product =
-await response.json();
+    const categorySelect = document.getElementById("category");
+    if (categorySelect && product.category) {
+      categorySelect.value = product.category;
+    }
 
-document.getElementById(
-"name"
-).value =
-product.name;
-
-document.getElementById(
-"price"
-).value =
-product.price;
-
-const categorySelect = document.getElementById("category");
-if (categorySelect) {
-  categorySelect.value = product.category;
+    // Show current image if exists
+    const imagePreview = document.getElementById("imagePreview");
+    if (imagePreview && product.image) {
+      const imgSrc = product.image.startsWith('http') ? product.image : product.image;
+      imagePreview.innerHTML = `<img src="${imgSrc}" alt="Current image" style="max-width:200px;margin-top:10px;">`;
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
-
-document.getElementById(
-"stock"
-).value =
-product.stock;
-
-document.getElementById(
-"description"
-).value =
-product.description;
-
-}
-
-catch(error){
-
-console.log(error);
-
-}
-
-}
-
 
 // UPDATE PRODUCT
+async function updateProduct() {
+  try {
+    await initSupabase();
 
-async function updateProduct(){
+    const updates = {
+      name: document.getElementById("name").value,
+      price: Number(document.getElementById("price").value),
+      category: document.getElementById("category").value,
+      stock: Number(document.getElementById("stock").value),
+      description: document.getElementById("description").value
+    };
 
-try{
-
-const formData =
-new FormData();
-
-formData.append(
-"name",
-document.getElementById("name").value
-);
-
-formData.append(
-"price",
-document.getElementById("price").value
-);
-
-formData.append(
-"category",
-document.getElementById("category").value
-);
-
-formData.append(
-"stock",
-document.getElementById("stock").value
-);
-
-formData.append(
-"description",
-document.getElementById("description").value
-);
-
-const file =
-document.getElementById(
-"imageFile"
-).files[0];
-
-if(file){
-
-formData.append(
-"image",
-file
-);
-
+    // Handle image upload separately if needed
+    const file = document.getElementById("imageFile").files[0];
+    if (file) {
+      // For now, store as data URL or skip image update
+      // In production, you'd upload to Supabase storage
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        updates.image = e.target.result;
+        await saveProduct(updates);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      await saveProduct(updates);
+    }
+  } catch (error) {
+    console.log(error);
+    alert("Failed to update product");
+  }
 }
 
-const token = localStorage.getItem('adminToken');
-await fetch(
+async function saveProduct(updates) {
+  const { error } = await supabaseClient
+    .from('products')
+    .update(updates)
+    .eq('id', id);
 
-`http://localhost:5000/api/products/${id}`,
+  if (error) {
+    console.log(error);
+    alert("Failed to update product");
+    return;
+  }
 
-{
-
-method: "PUT",
-body: formData,
-headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-
+  alert("Product Updated Successfully");
+  window.location = "products.html";
 }
-
-);
-
-alert(
-"Product Updated Successfully"
-);
-
-window.location =
-"products.html";
-
-}
-
-catch(error){
-
-console.log(error);
-
-}
-
-}
-
 
 loadProduct();
