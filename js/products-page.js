@@ -31,11 +31,11 @@
     // Show beautiful skeletal or text loader
     grid.innerHTML = '<div class="loading-state"><p>Loading our handmade collection...</p></div>';
 
-    let products = [];
+    var products = [];
     try {
       // Use Supabase client
-      const SUPABASE_URL = 'https://owzsyodcmdwnfpoqkxyx.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA';
+      var SUPABASE_URL = 'https://owzsyodcmdwnfpoqkxyx.supabase.co';
+      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA';
 
       if (!window.supabaseClient) {
         if (typeof window.supabase === 'undefined') {

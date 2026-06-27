@@ -1,4 +1,4 @@
-let supabaseClient = null;
+var supabaseClient = null;
 
 async function initSupabase() {
   if (supabaseClient) return supabaseClient;

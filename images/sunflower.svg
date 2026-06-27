@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Crochet sunflower">
+  <rect width="800" height="520" fill="#ecfdf5"/>
+  <g transform="translate(400 245)">
+    <g fill="#facc15">
+      <ellipse rx="44" ry="112" transform="rotate(0) translate(0 -90)"/>
+      <ellipse rx="44" ry="112" transform="rotate(45) translate(0 -90)"/>
+      <ellipse rx="44" ry="112" transform="rotate(90) translate(0 -90)"/>
+      <ellipse rx="44" ry="112" transform="rotate(135) translate(0 -90)"/>
+      <ellipse rx="44" ry="112" transform="rotate(180) translate(0 -90)"/>
+      <ellipse rx="44" ry="112" transform="rotate(225) translate(0 -90)"/>
+      <ellipse rx="44" ry="112" transform="rotate(270) translate(0 -90)"/>
+      <ellipse rx="44" ry="112" transform="rotate(315) translate(0 -90)"/>
+    </g>
+    <circle r="82" fill="#7c2d12"/>
+  </g>
+  <path d="M400 330v140" stroke="#15803d" stroke-width="18" stroke-linecap="round"/>
+</svg>

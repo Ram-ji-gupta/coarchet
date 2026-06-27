@@ -19,9 +19,11 @@ const WC = (() => {
     },
     /** Normalize an image filename to a full URL */
     img(filename) {
-      if (!filename) return "";
-      if (String(filename).startsWith("http")) return filename;
-      return `${this.API_BASE}/uploads/${filename}`;
+      if (!filename) return "images/product-placeholder.svg";
+      const value = String(filename);
+      if (value.startsWith("http") || value.startsWith("data:")) return value;
+      if (value.startsWith("images/") || value.startsWith("/images/")) return value;
+      return `${this.API_BASE}/uploads/${value}`;
     },
     /** Build a WhatsApp link with message */
     waLink(message) {
@@ -29,4 +31,3 @@ const WC = (() => {
     }
   });
 })();
-

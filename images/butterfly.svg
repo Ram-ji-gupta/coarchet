@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Crochet butterfly brooch">
+  <rect width="800" height="520" fill="#eef2ff"/>
+  <path d="M386 260c-95-135-230-105-220 8 8 86 118 100 220-8Z" fill="#111827"/>
+  <path d="M414 260c95-135 230-105 220 8-8 86-118 100-220-8Z" fill="#111827"/>
+  <path d="M388 272c-78 32-102 112-36 138 58 23 85-44 36-138Z" fill="#374151"/>
+  <path d="M412 272c78 32 102 112 36 138-58 23-85-44-36-138Z" fill="#374151"/>
+  <rect x="384" y="174" width="32" height="184" rx="16" fill="#7c2d12"/>
+</svg>
