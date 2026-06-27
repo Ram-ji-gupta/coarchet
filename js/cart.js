@@ -2,13 +2,13 @@
  * croch_etgallery — Shopping Cart Controller
  * Manages cart logic, local storage caching, rendering, and count indicators.
  */
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+var cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // Supabase configuration
-const SUPABASE_URL = 'https://owzsyodcmdwnfpoqkxyx.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA';
+var SUPABASE_URL = 'https://owzsyodcmdwnfpoqkxyx.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA';
 
-let supabaseClient = null;
+var supabaseClient = null;
 
 async function initSupabase() {
   if (supabaseClient) return supabaseClient;

@@ -2,9 +2,13 @@ async function loadGlobalSettings(){
 
 try{
 
+const settingsUrl = window.WC && typeof window.WC.api === "function"
+  ? window.WC.api("/api/settings")
+  : "/api/settings";
+
 const response =
 await fetch(
-"http://localhost:5000/api/settings"
+settingsUrl
 );
 
 const settings =

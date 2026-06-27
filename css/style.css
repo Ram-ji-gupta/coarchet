@@ -169,7 +169,7 @@ ol {
 body {
   background:
     linear-gradient(rgba(244, 242, 248, .88), rgba(232, 228, 240, .88)),
-    url("../images/background.jpg");
+    url("../images/background.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -563,7 +563,7 @@ select.nav-filter {
   transform: translateY(-50%);
   width: 380px;
   height: 380px;
-  background: url("../images/background.jpg") no-repeat center / contain;
+  background: url("../images/background.svg") no-repeat center / contain;
   opacity: .1;
   pointer-events: none;
 }

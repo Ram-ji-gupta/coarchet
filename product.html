@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#7a4f3d">
 
   <title>Product Details – croch_etgallery</title>
-  <link rel="icon" href="images/logo.png">
+  <link rel="icon" href="images/logo.svg">
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
@@ -39,7 +39,7 @@
   <main id="main-content">
     <section class="product-details">
       <div class="product-image">
-        <img src="images/Hand_band.webp" alt="Product image" id="productImage" width="420" height="320" decoding="async">
+        <img src="images/hand-band.svg" alt="Product image" id="productImage" width="420" height="320" decoding="async">
       </div>
 
       <div class="product-info">
@@ -80,8 +80,8 @@
   <script src="js/cart.js"></script>
 
   <script>
-    const SUPABASE_URL = 'https://owzsyodcmdwnfpoqkxyx.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA';
+    var SUPABASE_URL = 'https://owzsyodcmdwnfpoqkxyx.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enN5b2RjbWR3bmZwb3FreHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODUwODYsImV4cCI6MjA5ODA2MTA4Nn0.KXRtVkQYETGIJ7SwQWdAR9rR46oDmSLFL-gmm1M5UhA';
 
     async function initSupabase() {
       if (window.supabaseClient) return window.supabaseClient;

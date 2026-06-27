@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Handmade crochet product placeholder">
+  <rect width="800" height="520" fill="#fff7ed"/>
+  <rect x="52" y="52" width="696" height="416" rx="28" fill="#ffffff" stroke="#f4a261" stroke-width="6"/>
+  <circle cx="400" cy="250" r="92" fill="#f97316" opacity=".18"/>
+  <path d="M286 272c38-58 89-86 150-84 49 2 83 27 101 75" fill="none" stroke="#7c2d12" stroke-width="16" stroke-linecap="round"/>
+  <path d="M250 342c80-35 180-35 300 0" fill="none" stroke="#7c2d12" stroke-width="14" stroke-linecap="round"/>
+</svg>

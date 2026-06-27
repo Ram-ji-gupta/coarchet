@@ -2,8 +2,8 @@
 // GLOBAL PRODUCTS ARRAY
 // ==========================
 
-let allProducts = [];
-let supabaseClient = null;
+var allProducts = [];
+var supabaseClient = null;
 
 async function initSupabase() {
   if (supabaseClient) return supabaseClient;
